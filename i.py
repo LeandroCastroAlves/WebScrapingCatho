@@ -1,26 +1,14 @@
+from googlesearch import search
+import pandas as pd
 
-valor_pesquisa = input("teste: ")
+valor_pesquisa = input("Cargo: ")
 
-class cria_link():
-    def cria(vl, loop):
-        vl = valor_pesquisa.replace("ã", "a").replace("ç", "c").replace("é", "e").lower()
-        string = ""
-        item = vl.split()
-        i_len = len(item)
+acentos_map = {" ": "_", "ã": "a", "ç":"c", "é": "e"}
+df = pd.DataFrame(valor_pesquisa)
+valor_pesquisa_x = valor_pesquisa.format_map(acentos_map)
 
-        if i_len > 1:
+print(valor_pesquisa_x)
 
-            for i, valor in enumerate(vl.split()):
-                string += f"{valor}%20"
-
-                if i == (i_len - 2):
-                    string_if = "?q="+string+item[-1]+"&page="+str(loop)
-            return string_if
-
-        elif i_len == 1:
-            string_if = "?q=" + vl + "&page="+str(loop)
-        return string_if
-
-objeto = cria_link.cria(valor_pesquisa, 1)
-
-print(objeto)
+for resultado in search(f'"{valor_pesquisa}" catho', stop=1):
+    link = resultado
+print(link)
