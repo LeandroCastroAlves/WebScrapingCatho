@@ -1,7 +1,8 @@
-from bs4 import BeautifulSoup
 import requests
-import pandas as pd
+from bs4 import BeautifulSoup
 import csv
+import pandas as pd
+import os
 
 
 # Classe para formatar o texto do link
@@ -107,3 +108,4 @@ class GetDados:
             descricao = self.PegaDescricaoJob(self.link)
             lista.append[link, descricao]
         return lista
+
