@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import csv
 import pandas as pd
 import os
-from classes import cria_link
+from classes import cria_link, GetDados
 valor_pesquisa = input("teste: ")
 
 #valor_pesquisa = "cientista de dados"
@@ -26,15 +26,18 @@ f = csv.writer(open(f'{valor_pesquisa_under}.csv', 'w', newline='', encoding='ut
 f.writerow(['NPage', 'Link'])
 f.writerow([1, link])
 class_error = "sc-kvZOFW cmUGSo" # Classe de pagina sem vagas
-
+lista_unica = []
 for iteracao in range(2, 100, 1):
-    objeto = cria_link.cria(valor_pesquisa, iteracao)
+    objeto = cria_link(valor_pesquisa, iteracao).cria()
     link_n_pag = link+objeto
     chamada_n_pag = requests.get(link_n_pag)
     chamada_n_pag_txt = chamada_n_pag.text
-
+    nomes_jobs = GetDados(link_n_pag).PegaNomeJob()
+    for i in nomes_jobs:
+        lista_unica.append(i)
     if not class_error in chamada_n_pag_txt:
         f.writerow([iteracao, link_n_pag])
-        print(link + objeto)
+
     else:
         break
+
