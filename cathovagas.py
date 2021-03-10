@@ -1,7 +1,6 @@
 from i import PesquisaCargo, GetDados
 
-dataframe = PesquisaCargo("cientista de dados").ConjuntoLink()
-
+dataframe = PesquisaCargo("cientista de dados").PegaDescricaoJob()
 print(dataframe)
 
 

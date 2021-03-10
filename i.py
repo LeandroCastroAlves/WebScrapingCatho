@@ -48,7 +48,6 @@ class PesquisaCargo():
     def PegaNomeJob(self):
 
         vetor_nome_vagas = []
-        pesquisa = self.pesquisa
         for i in self.ConjuntoLink():
             requests_paginas_link = requests.get(i)
             soup_paginas_link = BeautifulSoup(requests_paginas_link.text, 'html.parser')
@@ -59,25 +58,26 @@ class PesquisaCargo():
             return vetor_nome_vagas
 
     def PegaDescricaoJob(self):
-        get_pagina = requests.get(self.link)
-        soup_pagina = BeautifulSoup(get_pagina.text, 'html.parser')
-        soup_pagina.encode()
-        classe_descricao_job = soup_pagina.find_all(class_="sc-jAaTju bBEyWy")
+
         vetor_descricao_vagas = []
         vetor_descricao_vagas_href = []
+        for i in self.ConjuntoLink():
+            get_pagina = requests.get(i)
+            soup_pagina = BeautifulSoup(get_pagina.text, 'html.parser')
+            classe_descricao_job = soup_pagina.find_all(class_="sc-jAaTju bBEyWy")
 
-        for i in classe_descricao_job:
-            vetor_descricao_vagas.append(i.a.get('href'))
+            for i in classe_descricao_job:
+                vetor_descricao_vagas.append(i.a.get('href'))
 
-        for i in vetor_descricao_vagas:
-            get_pagina_href = requests.get(i)
-            soup_pagina_href = BeautifulSoup(get_pagina_href.text, 'html.parser')
-            classe_descrica_vaga_href = soup_pagina_href.find_all(class_="descricaoVaga")
+            for i in vetor_descricao_vagas:
+                get_pagina_href = requests.get(i)
+                soup_pagina_href = BeautifulSoup(get_pagina_href.text, 'html.parser')
+                classe_descrica_vaga_href = soup_pagina_href.find_all(class_="descricaoVaga")
 
             for i in classe_descrica_vaga_href:
                 vetor_descricao_vagas_href.append(i.p.text)
 
-        return vetor_descricao_vagas_href
+            return vetor_descricao_vagas_href
 
 
 class GetDados:
