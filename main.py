@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup
 import csv
 import pandas as pd
 import numpy
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 import matplotlib.pyplot as plt
 from sklearn.decomposition._nmf import _beta_divergence
 
@@ -12,7 +14,7 @@ import os
 
 
 valor_pesquisa = input("Cargo: ")
-valor_pesquisa_under = valor_pesquisa.replace(" ", "_").replace("ã", "a").replace("ç", "c").lower()
+valor_pesquisa_under = valor_pesquisa.replace(" ", "_").replace("ã", "a").replace("ç", "c").replace("é", "e").lower()
 
 #valor_pesquisa = "Desenvolvedor Java"
 #valor_pesquisa_under = valor_pesquisa.replace(" ", "_").replace("ã", "a").replace("ç", "c").lower()
