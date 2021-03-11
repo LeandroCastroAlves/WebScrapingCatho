@@ -1,6 +1,16 @@
-from i import PesquisaCargo, GetDados
+from classes import PesquisaCargo
+import pandas as pd
+import csv
+import time
+pesquisa = input("Cargo: ")
+info_lista = []
+df = pd.DataFrame(info_lista, columns=['nome', 'descricao', 'localizacao', 'salario'])
 
-dataframe = PesquisaCargo("cientista de dados").PegaDescricaoJob()
-print(dataframe)
+
+
+
+encontrados = PesquisaCargo(pesquisa).PegaQtdJob()
+print(encontrados)
+
 
 
