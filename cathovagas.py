@@ -1,16 +1,18 @@
+#
+import os
 from classes import PesquisaCargo
-import pandas as pd
-import csv
-import time
-pesquisa = input("Cargo: ")
-info_lista = []
-df = pd.DataFrame(info_lista, columns=['nome', 'descricao', 'localizacao', 'salario'])
+from classesarquivoanalise import AnaliseArquivo
+
+pesquisa = input("Pesquisa por cargo: ")
+
+AnaliseArquivo(pesquisa).MediaSalarial()
 
 
 
 
-encontrados = PesquisaCargo(pesquisa).PegaQtdJob()
-print(encontrados)
+
+
+
 
 
 

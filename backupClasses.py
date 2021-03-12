@@ -11,16 +11,16 @@ class PesquisaCargo():
     def __init__(self, pesquisa, loop=0):
         self.loop = loop
         self.pesquisa = pesquisa
+        self.valor_pesquisa_traco = pesquisa.replace(" ", "-").replace("ã", "a").replace("ç", "c").replace("é", "e").lower()
+        self.link = f"https://www.catho.com.br/vagas/{self.valor_pesquisa_traco}/"
 
     def ConjuntoLink(self):
         pesquisa = self.pesquisa
-        valor_pesquisa_traco = pesquisa.replace(" ", "-").replace("ã", "a").replace("ç", "c").replace("é", "e").lower()
-        link = f"https://www.catho.com.br/vagas/{valor_pesquisa_traco}/"
         class_error = "sc-kvZOFW cmUGSo"  # Classe de pagina sem vagas
         lista_unica = []
-        lista_unica.append(link)
+        lista_unica.append(self.link)
         for iteracao in range(2, 100, 1):
-            link_formatado = link + PesquisaCargo(pesquisa, iteracao).FormataPesquisaParaLink()
+            link_formatado = self.link + PesquisaCargo(pesquisa, iteracao).FormataPesquisaParaLink()
             requests_paginas_formatadas = requests.get(link_formatado).text
             if not class_error in requests_paginas_formatadas:
                 lista_unica.append(link_formatado)
@@ -42,6 +42,7 @@ class PesquisaCargo():
         elif i_len == 1:
             string_if = "?q=" + pesquisa + "&page=" + str(self.loop)
         return string_if
+
 
     def PegaDescricaoJob(self):
 
@@ -66,7 +67,7 @@ class PesquisaCargo():
         vetor_nome_vagas = []
         for i in self.ConjuntoLink():
             go = requests.get(i)
-            soup = BeautifulSoup(go.text, 'html.parser')
+            soup = BeautifulSoup(go.content.decode('UTF-8'), 'html.parser')
             classe_nome_job = soup.find_all(class_="sc-jAaTju bBEyWy")
             for j in classe_nome_job:
                 vetor_nome_vagas.append(j.a.text)
@@ -82,6 +83,16 @@ class PesquisaCargo():
             for i in classe_salario_job:
                 vetor_salario_vagas.append(i.text)
         return vetor_salario_vagas
+
+    def PegaLocalizacaoJob(self):
+        vetor_localizacao_vagas = []
+        for i in self.ConjuntoLink():
+            go = requests.get(i)
+            soup = BeautifulSoup(go.content.decode('UTF-8'), 'html.parser')
+            classe_localizacao_job = soup.find_all(class_="sc-jhAzac fBEAcd")
+            for i in classe_localizacao_job:
+                vetor_localizacao_vagas.append(i.text)
+        return vetor_localizacao_vagas
 
     def PegaMediaSalarioJob(self):
 
@@ -99,6 +110,13 @@ class PesquisaCargo():
 
             df = pd.DataFrame(vetor_num)
         return df
+
+    def PegaQtdJob(self):
+        requests_paginas_link = requests.get(self.link)
+        soup_paginas_link = BeautifulSoup(requests_paginas_link.text, 'html.parser')
+        classe_salario_job = soup_paginas_link.find(class_="sc-caSCKo ifvWxd")
+        return classe_salario_job.contents
+
 
     def DataFrameInfo(self):
         return self.PegaDescricaoJob()

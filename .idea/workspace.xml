@@ -20,8 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="867554a0-f4fd-4fa9-94a8-81df694b9ae8" name="Default Changelist" comment="update">
-      <change afterPath="$PROJECT_DIR$/backupClasses.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/classesarquivoanalise.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backupClasses.py" beforeDir="false" afterPath="$PROJECT_DIR$/backupClasses.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cathovagas.py" beforeDir="false" afterPath="$PROJECT_DIR$/cathovagas.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/i.py" beforeDir="false" afterPath="$PROJECT_DIR$/i.py" afterDir="false" />
@@ -95,6 +96,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="classesarquivoanalise" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="skills-finder" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="E:\PycharmProject\skills-finder\classesarquivoanalise.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="i" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="skills-finder" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -108,27 +130,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/i.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="skills-finder" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -163,8 +164,8 @@
         <item itemvalue="Python.cathovagas" />
         <item itemvalue="Python.i" />
         <item itemvalue="Python.xxx" />
+        <item itemvalue="Python.classesarquivoanalise" />
         <item itemvalue="Python.classes" />
-        <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
@@ -254,7 +255,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615416476696</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="update">
+      <created>1615484370658</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1615484370658</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -274,55 +282,67 @@
     <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1345" height="227" key="GridCell.Tab.0.bottom" timestamp="1615484337025">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="227" key="GridCell.Tab.0.bottom/0.0.1366.728/156.-768.1024.728@0.0.1366.728" timestamp="1615484337025" />
-    <state width="1003" height="149" key="GridCell.Tab.0.bottom/0.0.1366.728/156.-768.1024.728@156.-768.1024.728" timestamp="1615427273163" />
-    <state width="1345" height="255" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1615344566696" />
-    <state width="1345" height="227" key="GridCell.Tab.0.center" timestamp="1615484337025">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="227" key="GridCell.Tab.0.center/0.0.1366.728/156.-768.1024.728@0.0.1366.728" timestamp="1615484337025" />
-    <state width="1003" height="149" key="GridCell.Tab.0.center/0.0.1366.728/156.-768.1024.728@156.-768.1024.728" timestamp="1615427273162" />
-    <state width="1345" height="255" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1615344566696" />
-    <state width="1345" height="227" key="GridCell.Tab.0.left" timestamp="1615484337025">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="227" key="GridCell.Tab.0.left/0.0.1366.728/156.-768.1024.728@0.0.1366.728" timestamp="1615484337025" />
-    <state width="1003" height="149" key="GridCell.Tab.0.left/0.0.1366.728/156.-768.1024.728@156.-768.1024.728" timestamp="1615427273162" />
-    <state width="1345" height="255" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1615344566696" />
-    <state width="1345" height="227" key="GridCell.Tab.0.right" timestamp="1615484337025">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="227" key="GridCell.Tab.0.right/0.0.1366.728/156.-768.1024.728@0.0.1366.728" timestamp="1615484337025" />
-    <state width="1003" height="149" key="GridCell.Tab.0.right/0.0.1366.728/156.-768.1024.728@156.-768.1024.728" timestamp="1615427273162" />
-    <state width="1345" height="255" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1615344566696" />
-    <state width="1345" height="223" key="GridCell.Tab.1.bottom" timestamp="1615434231868">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728/156.-768.1024.728@0.0.1366.728" timestamp="1615434231868" />
-    <state width="1345" height="223" key="GridCell.Tab.1.center" timestamp="1615434231868">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="223" key="GridCell.Tab.1.center/0.0.1366.728/156.-768.1024.728@0.0.1366.728" timestamp="1615434231868" />
-    <state width="1345" height="223" key="GridCell.Tab.1.left" timestamp="1615434231868">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="223" key="GridCell.Tab.1.left/0.0.1366.728/156.-768.1024.728@0.0.1366.728" timestamp="1615434231868" />
-    <state width="1345" height="223" key="GridCell.Tab.1.right" timestamp="1615434231868">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="223" key="GridCell.Tab.1.right/0.0.1366.728/156.-768.1024.728@0.0.1366.728" timestamp="1615434231868" />
-    <state x="362" y="-671" key="Vcs.Push.Dialog.v2" timestamp="1615416489659">
+    <state x="398" y="-657" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1615523712870">
       <screen x="156" y="-768" width="1024" height="728" />
     </state>
-    <state x="141" y="94" key="Vcs.Push.Dialog.v2/0.0.1366.728/156.-768.1024.728@0.0.1366.728" timestamp="1615346380384" />
+    <state x="398" y="-657" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728/156.-768.1024.728@156.-768.1024.728" timestamp="1615523712870" />
+    <state width="1003" height="227" key="GridCell.Tab.0.bottom" timestamp="1615523664621">
+      <screen x="156" y="-768" width="1024" height="728" />
+    </state>
+    <state width="1345" height="227" key="GridCell.Tab.0.bottom/0.0.1366.728/156.-768.1024.728@0.0.1366.728" timestamp="1615499773686" />
+    <state width="1003" height="227" key="GridCell.Tab.0.bottom/0.0.1366.728/156.-768.1024.728@156.-768.1024.728" timestamp="1615523664621" />
+    <state width="1345" height="255" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1615344566696" />
+    <state width="1003" height="227" key="GridCell.Tab.0.center" timestamp="1615523664621">
+      <screen x="156" y="-768" width="1024" height="728" />
+    </state>
+    <state width="1345" height="227" key="GridCell.Tab.0.center/0.0.1366.728/156.-768.1024.728@0.0.1366.728" timestamp="1615499773686" />
+    <state width="1003" height="227" key="GridCell.Tab.0.center/0.0.1366.728/156.-768.1024.728@156.-768.1024.728" timestamp="1615523664621" />
+    <state width="1345" height="255" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1615344566696" />
+    <state width="1003" height="227" key="GridCell.Tab.0.left" timestamp="1615523664621">
+      <screen x="156" y="-768" width="1024" height="728" />
+    </state>
+    <state width="1345" height="227" key="GridCell.Tab.0.left/0.0.1366.728/156.-768.1024.728@0.0.1366.728" timestamp="1615499773686" />
+    <state width="1003" height="227" key="GridCell.Tab.0.left/0.0.1366.728/156.-768.1024.728@156.-768.1024.728" timestamp="1615523664621" />
+    <state width="1345" height="255" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1615344566696" />
+    <state width="1003" height="227" key="GridCell.Tab.0.right" timestamp="1615523664621">
+      <screen x="156" y="-768" width="1024" height="728" />
+    </state>
+    <state width="1345" height="227" key="GridCell.Tab.0.right/0.0.1366.728/156.-768.1024.728@0.0.1366.728" timestamp="1615499773686" />
+    <state width="1003" height="227" key="GridCell.Tab.0.right/0.0.1366.728/156.-768.1024.728@156.-768.1024.728" timestamp="1615523664621" />
+    <state width="1345" height="255" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1615344566696" />
+    <state width="1345" height="223" key="GridCell.Tab.1.bottom" timestamp="1615484627845">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1345" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728/156.-768.1024.728@0.0.1366.728" timestamp="1615484627845" />
+    <state width="1345" height="223" key="GridCell.Tab.1.center" timestamp="1615484627844">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1345" height="223" key="GridCell.Tab.1.center/0.0.1366.728/156.-768.1024.728@0.0.1366.728" timestamp="1615484627844" />
+    <state width="1345" height="223" key="GridCell.Tab.1.left" timestamp="1615484627844">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1345" height="223" key="GridCell.Tab.1.left/0.0.1366.728/156.-768.1024.728@0.0.1366.728" timestamp="1615484627844" />
+    <state width="1345" height="223" key="GridCell.Tab.1.right" timestamp="1615484627845">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1345" height="223" key="GridCell.Tab.1.right/0.0.1366.728/156.-768.1024.728@0.0.1366.728" timestamp="1615484627845" />
+    <state x="141" y="94" key="Vcs.Push.Dialog.v2" timestamp="1615484404380">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="141" y="94" key="Vcs.Push.Dialog.v2/0.0.1366.728/156.-768.1024.728@0.0.1366.728" timestamp="1615484404380" />
     <state x="362" y="-671" key="Vcs.Push.Dialog.v2/0.0.1366.728/156.-768.1024.728@156.-768.1024.728" timestamp="1615416489659" />
     <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1615346264511" />
     <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1615346247275">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1615346247275" />
+    <state x="309" y="-678" width="700" height="530" key="recent.locations.popup" timestamp="1615515002528">
+      <screen x="156" y="-768" width="1024" height="728" />
+    </state>
+    <state x="309" y="-678" width="700" height="530" key="recent.locations.popup/0.0.1366.728/156.-768.1024.728@156.-768.1024.728" timestamp="1615515002528" />
+    <state x="331" y="-719" width="672" height="678" key="search.everywhere.popup" timestamp="1615515123746">
+      <screen x="156" y="-768" width="1024" height="728" />
+    </state>
+    <state x="331" y="-719" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/156.-768.1024.728@156.-768.1024.728" timestamp="1615515123746" />
   </component>
 </project>

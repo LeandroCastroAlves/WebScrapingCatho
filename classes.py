@@ -8,10 +8,10 @@ import os
 # Classe para formatar o texto do link
 class PesquisaCargo():
 
-    def __init__(self, pesquisa, loop=0):
+    def __init__(self, pesquisa, loop=0, valor_pesquisa_traco=""):
         self.loop = loop
         self.pesquisa = pesquisa
-        self.valor_pesquisa_traco = pesquisa.replace(" ", "-").replace("ã", "a").replace("ç", "c").replace("é", "e").lower()
+        self.valor_pesquisa_traco = pesquisa.replace(" ", "-").replace("ã", "a").replace("ç", "c").replace("é", "e").replace("á", "a").lower()
         self.link = f"https://www.catho.com.br/vagas/{self.valor_pesquisa_traco}/"
 
     def ConjuntoLink(self):
@@ -118,8 +118,9 @@ class PesquisaCargo():
         return classe_salario_job.contents
 
 
-    def DataFrameInfo(self):
-        return self.PegaDescricaoJob()
+    def PesquisaFormat(self):
+        return self.valor_pesquisa_traco
+
 
 
 
