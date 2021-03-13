@@ -12,17 +12,16 @@ class AnaliseArquivo():
     def GeraArquivo(self):
         info_lista = []
         df = pd.DataFrame(info_lista, columns=['nome', 'localizacao', 'salarios', 'descricao'])
-        cont_int = int(str(self.encontrados).split()[-1].replace("']", ""))
+        cont_int = int(str(self.encontrados).split()[0])
         print(f"Total de anuncios {cont_int}")
         print(f'Por favor aguarde o rastreio das informações, isso pode demorar um pouco...')
-        nome = PesquisaCargo(self.pesquisa).PegaNomeJob()
-        localizacao = PesquisaCargo(self.pesquisa).PegaLocalizacaoJob()
-        salarios = PesquisaCargo(self.pesquisa).PegaSalarioJob()
-        descricao = PesquisaCargo(self.pesquisa).PegaDescricaoJob()
-        x = []
-        for i in range(cont_int):
-            df.loc[i] = [nome[i], localizacao[i], salarios[i], descricao[i]]
-        df.to_csv(f'{self.valor_pesquisa_traco}.csv', sep=';', index=False)
+        print(PesquisaCargo(self.pesquisa).PegaNomeJob())
+        print(PesquisaCargo(self.pesquisa).PegaLocalizacaoJob())
+        print(PesquisaCargo(self.pesquisa).PegaSalarioJob())
+        print(PesquisaCargo(self.pesquisa).PegaDescricaoJob())
+        print(cont_int)
+
+
     def MediaSalarial(self):
         if os.path.isfile(f'{self.valor_pesquisa_traco}.csv'):
             count_ = 0

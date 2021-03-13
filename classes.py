@@ -112,11 +112,12 @@ class PesquisaCargo():
         return df
 
     def PegaQtdJob(self):
-        requests_paginas_link = requests.get(self.link)
-        soup_paginas_link = BeautifulSoup(requests_paginas_link.text, 'html.parser')
-        classe_salario_job = soup_paginas_link.find(class_="sc-caSCKo ifvWxd")
-        return classe_salario_job.contents
-
+        go = requests.get(self.link)
+        soup = BeautifulSoup(go.text, 'html.parser')
+        soup = soup.find(id='search-result')
+        soup = soup.div.p.string
+        soup = soup.replace("Total de anúncios: ", "").replace(".", "")
+        return int(soup)
 
     def PesquisaFormat(self):
         return self.valor_pesquisa_traco
