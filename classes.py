@@ -63,14 +63,14 @@ class PesquisaCargo():
         return vetor_desc_vagas
 
     def PegaNomeJob(self):
-
         vetor_nome_vagas = []
         for i in self.ConjuntoLink():
             go = requests.get(i)
-            soup = BeautifulSoup(go.content.decode('UTF-8'), 'html.parser')
-            classe_nome_job = soup.find_all(class_="sc-jAaTju bBEyWy")
-            for j in classe_nome_job:
-                vetor_nome_vagas.append(j.a.text)
+            soup = BeautifulSoup(go.text, 'html.parser')
+            soup = soup.find(id='search-result')
+            soup = soup.find_all('li')
+            for i in soup:
+                vetor_nome_vagas.append(i.h2.a.string)
         return vetor_nome_vagas
 
     def PegaSalarioJob(self):
@@ -78,9 +78,9 @@ class PesquisaCargo():
         vetor_salario_vagas = []
         for i in self.ConjuntoLink():
             go = requests.get(i)
-            soup = BeautifulSoup(go.text, 'html.parser')
-            classe_salario_job = soup.find_all(class_="sc-eqIVtm bTmKXM")
-            for i in classe_salario_job:
+            v = BeautifulSoup(go.text, 'html.parser')
+            v = v.find_all(class_="sc-eqIVtm bTmKXM")
+            for i in v:
                 vetor_salario_vagas.append(i.text)
         return vetor_salario_vagas
 
@@ -88,20 +88,21 @@ class PesquisaCargo():
         vetor_localizacao_vagas = []
         for i in self.ConjuntoLink():
             go = requests.get(i)
-            soup = BeautifulSoup(go.content.decode('UTF-8'), 'html.parser')
-            classe_localizacao_job = soup.find_all(class_="sc-jhAzac fBEAcd")
-            for i in classe_localizacao_job:
-                vetor_localizacao_vagas.append(i.text)
-        return vetor_localizacao_vagas
+            v = BeautifulSoup(go.text, 'html.parser')
+            v = v.find(id='search-result')
+            v = v.find_all('header')
+            for i in v:
+                vetor_localizacao_vagas.append(i.button.string)
+            return vetor_localizacao_vagas
 
     def PegaMediaSalarioJob(self):
 
         vetor_salario_vagas = []
         vetor_num = []
         for i in self.ConjuntoLink():
-            requests_paginas_link = requests.get(i)
-            soup_paginas_link = BeautifulSoup(requests_paginas_link.text, 'html.parser')
-            classe_salario_job = soup_paginas_link.find_all(class_="sc-eqIVtm bTmKXM")
+            go = requests.get(i)
+            soup = BeautifulSoup(go.text, 'html.parser')
+            classe_salario_job = soup.find_all(class_="sc-eqIVtm bTmKXM")
             for i in classe_salario_job:
                 vetor_salario_vagas.append(i.text)
             for i in vetor_salario_vagas:
@@ -113,11 +114,11 @@ class PesquisaCargo():
 
     def PegaQtdJob(self):
         go = requests.get(self.link)
-        soup = BeautifulSoup(go.text, 'html.parser')
-        soup = soup.find(id='search-result')
-        soup = soup.div.p.string
-        soup = soup.replace("Total de anúncios: ", "").replace(".", "")
-        return int(soup)
+        v = BeautifulSoup(go.text, 'html.parser')
+        v = v.find(id='search-result')
+        v = v.div.p.string
+        v = v.replace("Total de anúncios: ", "").replace(".", "")
+        return int(v)
 
     def PesquisaFormat(self):
         return self.valor_pesquisa_traco

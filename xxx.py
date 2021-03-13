@@ -2,18 +2,19 @@ import requests
 from bs4 import BeautifulSoup
 
 a = []
-def PegaLocalizacaoJob():
-    a = ["https://www.catho.com.br/vagas/engenheiro-de-producao/", "https://www.catho.com.br/vagas/engenheiro-de-producao/?q=Engenheiro%20de%20Produ%C3%A7%C3%A3o&page=2"]
+
+
+def PegaLocalizacaoJob(self):
     vetor_localizacao_vagas = []
-    for i in a:
+    for i in self.ConjuntoLink():
         go = requests.get(i)
-        soup = BeautifulSoup(go.text, 'html.parser')
-        soup = soup.find(id='search-result')
-        soup = soup.find_all('li')
-        for i in soup:
-            print(i.h2.a.string)
+        v = BeautifulSoup(go.content.decode('UTF-8'), 'html.parser')
+        v = v.find_all(class_="sc-jhAzac fBEAcd")
+        for i in v:
+            vetor_localizacao_vagas.append(i.text)
+    return vetor_localizacao_vagas
 
 
 
 
-PegaLocalizacaoJob()
+print(PegaLocalizacaoJob())

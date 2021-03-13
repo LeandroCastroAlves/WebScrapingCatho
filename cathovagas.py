@@ -4,10 +4,10 @@ from classes import PesquisaCargo
 from classesarquivoanalise import AnaliseArquivo
 
 #pesquisa = input("Pesquisa por cargo: ")
-pesquisa = 'engenheiro de dados'
+pesquisa = 'apresentador'
 
 
-x = PesquisaCargo(pesquisa).PegaSalarioJob()
+x = PesquisaCargo(pesquisa).PegaMediaSalarioJob()
 print(x)
 
 

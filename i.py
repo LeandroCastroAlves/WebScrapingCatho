@@ -7,11 +7,13 @@ def PegaLocalizacaoJob():
     vetor_localizacao_vagas = []
     for i in a:
         go = requests.get(i)
-        soup = BeautifulSoup(go.content.decode('UTF-8'), 'html.parser')
-        classe_job = soup.find_all(id="search-result")
-        soup_ = BeautifulSoup(classe_job, 'html.parser')
+        v = BeautifulSoup(go.text, 'html.parser')
+        v = v.find(id='search-result')
+        v = v.find_all('header')
+        print(v.)
 
-        print(soup_.prettify())
 
 
-print(PegaLocalizacaoJob())
+
+
+PegaLocalizacaoJob()
