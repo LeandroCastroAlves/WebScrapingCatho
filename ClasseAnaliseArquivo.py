@@ -1,7 +1,7 @@
 import pandas as pd
-from classes import PesquisaCargo
+from ClassePesquisaCargo import PesquisaCargo
 import os
-import time
+
 
 class AnaliseArquivo():
     def __init__(self, pesquisa):
@@ -9,17 +9,16 @@ class AnaliseArquivo():
         self.encontrados = PesquisaCargo(pesquisa).PegaQtdJob()
         self.valor_pesquisa_traco = pesquisa.replace(" ", "-").replace("ã", "a").replace("ç", "c").replace("é",
                                                                                                            "e").lower()
-    def GeraArquivo(self):
-        info_lista = []
-        df = pd.DataFrame(info_lista, columns=['nome', 'localizacao', 'salarios', 'descricao'])
+    def GeraArquivocsv(self):
         cont_int = int(str(self.encontrados).split()[0])
         print(f"Total de anuncios {cont_int}")
         print(f'Por favor aguarde o rastreio das informações, isso pode demorar um pouco...')
-        print(PesquisaCargo(self.pesquisa).PegaNomeJob())
-        print(PesquisaCargo(self.pesquisa).PegaLocalizacaoJob())
-        print(PesquisaCargo(self.pesquisa).PegaSalarioJob())
-        print(PesquisaCargo(self.pesquisa).PegaDescricaoJob())
-        print(cont_int)
+
+        return PesquisaCargo(self.pesquisa).PegaDtPubliJob()\
+            .join(PesquisaCargo(self.pesquisa).PegaNomeJob())\
+            .join(PesquisaCargo(self.pesquisa).PegaLocalizacaoJob())\
+            .join(PesquisaCargo(self.pesquisa).PegaSalarioJob())\
+            .join(PesquisaCargo(self.pesquisa).PegaDescricaoJob()).to_csv(f'{self.valor_pesquisa_traco}.csv', sep=";")
 
 
     def MediaSalarial(self):
@@ -29,8 +28,13 @@ class AnaliseArquivo():
             soma = 0
             for i in df['salarios']:
                 str_ = str(i)
-                str_ = str_.replace("A Combinar", "0").replace("De R$", "").replace("a R$", "").replace(",00", "").replace(
-                    ".", "").split()
+                str_ = str_.replace("A Combinar", "0")\
+                    .replace("De R$", "")\
+                    .replace("a R$", "")\
+                    .replace(",00", "") \
+                    .replace("Acima de R$ ", "") \
+                    .replace("Até R$ ", "") \
+                    .replace(".", "").split()
                 for i in str_:
                     i = float(i)
                     soma += i

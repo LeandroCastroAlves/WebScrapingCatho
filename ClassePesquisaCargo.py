@@ -4,7 +4,6 @@ import csv
 import pandas as pd
 import os
 
-
 # Classe para formatar o texto do link
 class PesquisaCargo():
 
@@ -16,13 +15,13 @@ class PesquisaCargo():
 
     def ConjuntoLink(self):
         pesquisa = self.pesquisa
-        class_error = "sc-kvZOFW cmUGSo"  # Classe de pagina sem vagas
+        id_comum = "search-result"  # Classe de pagina sem vagas
         lista_unica = []
         lista_unica.append(self.link)
-        for iteracao in range(2, 100, 1):
+        for iteracao in range(2, 10, 1):
             link_formatado = self.link + PesquisaCargo(pesquisa, iteracao).FormataPesquisaParaLink()
             requests_paginas_formatadas = requests.get(link_formatado).text
-            if not class_error in requests_paginas_formatadas:
+            if id_comum in requests_paginas_formatadas:
                 lista_unica.append(link_formatado)
             else:
                 break
@@ -46,19 +45,21 @@ class PesquisaCargo():
 
     def PegaDescricaoJob(self):
 
-        vetor_desc_vagas_href = []
         vetor_desc_vagas = []
         for i in self.ConjuntoLink():
             go = requests.get(i)
-            soup = BeautifulSoup(go.text, 'html.parser')
-            classe_desc_job = soup.find_all(class_="sc-jAaTju bBEyWy")
-            for i in classe_desc_job:
-                vetor_desc_vagas_href.append(i.a.get('href'))
-            for i in vetor_desc_vagas_href:
-                go = requests.get(i)
-                soup = BeautifulSoup(go.content.decode('UTF-8').replace('\n', '').replace("'", " ").replace("         ", "").replace("     ", ""), 'html.parser')
-                classe_desc_vaga_href = soup.find(class_="descricaoVaga")
-                vetor_desc_vagas.append(classe_desc_vaga_href.p.text)
+            v = BeautifulSoup(go.text, 'html.parser')
+            v = v.find(id='search-result')
+            v = v.find_all('article')
+            for i in v:
+                link = i.div.h2.a.get('href')
+                go = requests.get(link)
+                v = BeautifulSoup(go.content.decode('UTF-8'), 'html.parser')
+                v = v.find_all(id='descricaoVagaTexto')
+                for i in v:
+                    v = i.text.replace("         ", "").replace('\n', '').replace("'", "").replace("    ", "")
+                    vetor_desc_vagas.append(v)
+        return pd.DataFrame({'descricao': vetor_desc_vagas})
 
         return vetor_desc_vagas
 
@@ -66,23 +67,12 @@ class PesquisaCargo():
         vetor_nome_vagas = []
         for i in self.ConjuntoLink():
             go = requests.get(i)
-            soup = BeautifulSoup(go.text, 'html.parser')
-            soup = soup.find(id='search-result')
-            soup = soup.find_all('li')
-            for i in soup:
-                vetor_nome_vagas.append(i.h2.a.string)
-        return vetor_nome_vagas
-
-    def PegaSalarioJob(self):
-
-        vetor_salario_vagas = []
-        for i in self.ConjuntoLink():
-            go = requests.get(i)
             v = BeautifulSoup(go.text, 'html.parser')
-            v = v.find_all(class_="sc-eqIVtm bTmKXM")
+            v = v.find(id='search-result')
+            v = v.find_all('li')
             for i in v:
-                vetor_salario_vagas.append(i.text)
-        return vetor_salario_vagas
+                vetor_nome_vagas.append(i.h2.a.string)
+        return pd.DataFrame({'nome': vetor_nome_vagas})
 
     def PegaLocalizacaoJob(self):
         vetor_localizacao_vagas = []
@@ -93,24 +83,32 @@ class PesquisaCargo():
             v = v.find_all('header')
             for i in v:
                 vetor_localizacao_vagas.append(i.button.string)
-            return vetor_localizacao_vagas
+        return pd.DataFrame({'localizacao': vetor_localizacao_vagas})
 
-    def PegaMediaSalarioJob(self):
-
+    def PegaSalarioJob(self):
         vetor_salario_vagas = []
-        vetor_num = []
         for i in self.ConjuntoLink():
             go = requests.get(i)
-            soup = BeautifulSoup(go.text, 'html.parser')
-            classe_salario_job = soup.find_all(class_="sc-eqIVtm bTmKXM")
-            for i in classe_salario_job:
-                vetor_salario_vagas.append(i.text)
-            for i in vetor_salario_vagas:
-                if i != "A Combinar":
-                    vetor_num.append(i)
+            v = BeautifulSoup(go.text, 'html.parser')
+            v = v.find(id='search-result')
+            v = v.find_all('header')
+            for i in v:
+                for j in i:
+                    v = j.find_all('div')
+                    vetor_salario_vagas.append(v[2].text)
+        return pd.DataFrame({'salario': vetor_salario_vagas})
 
-            df = pd.DataFrame(vetor_num)
-        return df
+    def PegaDtPubliJob(self):
+        vetor_dtpupli_vagas = []
+        for i in self.ConjuntoLink():
+            go = requests.get(i)
+            v = BeautifulSoup(go.text, 'html.parser')
+            v = v.find(id='search-result')
+            v = v.find_all('time')
+            for i in v:
+                v = i.span.string.split()[-1]
+                vetor_dtpupli_vagas.append(v)
+        return pd.DataFrame({'datapubl': vetor_dtpupli_vagas})
 
     def PegaQtdJob(self):
         go = requests.get(self.link)
