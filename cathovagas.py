@@ -4,10 +4,10 @@ from ClassePesquisaCargo import PesquisaCargo
 from ClasseAnaliseArquivo import AnaliseArquivo
 
 #pesquisa = input("Pesquisa por cargo: ")
-pesquisa = 'apresentador'
+pesquisa = "gerente farmaceltico"
 
 
-AnaliseArquivo(pesquisa).GeraArquivocsv()
+print(AnaliseArquivo(pesquisa).GeraArquivocsv())
 
 
 

@@ -1,25 +1,30 @@
 import requests
 from bs4 import BeautifulSoup
-import time
-
-
-from ClassePesquisaCargo import PesquisaCargo
+import pandas as pd
 
 
 
-def PegaDtPubliJob():
-    vetor_dtpupli_vagas = []
+
+def PegaLocalizacaoJob():
+    vetor_salario_vagas = []
+    vetor_salario_media = []
+    a = ['https://www.catho.com.br/vagas/engenheiro-de-producao/',
+         'https://www.catho.com.br/vagas/engenheiro-de-producao/?q=Engenheiro%20de%20Produ%C3%A7%C3%A3o&page=2']
+    vetor_localizacao_vagas = []
     for i in a:
         go = requests.get(i)
         v = BeautifulSoup(go.text, 'html.parser')
         v = v.find(id='search-result')
-        v = v.find_all('time')
+        v = v.find_all('header')
         for i in v:
-            v = i.span.string.split()[-1]
-            vetor_dtpupli_vagas.append(v)
-        return vetor_dtpupli_vagas
-print(PegaDtPubliJob())
-#//*[@id="job-18274692"]/header/div/div[2]/time/span
-#<class 'bs4.element.Tag'>
-#//*[@id="descricaoVagaTexto"]/text()
-#//*[@id="job-18274692"]/header/div/div[2]/div
+            vetor_localizacao_vagas.append(i.button.string
+                                           .replace(" (1)", "")
+                                           .replace(" (2)", "")
+                                           .replace(" (3)", "")
+                                           .replace(" (4)", "")
+                                           .replace(" (5)", ""))
+    return vetor_localizacao_vagas
+
+
+
+print(PegaLocalizacaoJob())

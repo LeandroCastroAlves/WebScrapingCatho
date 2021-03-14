@@ -1,4 +1,7 @@
 import pandas as pd
+import requests
+from bs4 import BeautifulSoup
+
 from ClassePesquisaCargo import PesquisaCargo
 import os
 
@@ -22,30 +25,21 @@ class AnaliseArquivo():
 
 
     def MediaSalarial(self):
-        if os.path.isfile(f'{self.valor_pesquisa_traco}.csv'):
-            count_ = 0
-            df = pd.read_csv(f'{self.valor_pesquisa_traco}.csv', sep=';')
-            soma = 0
-            for i in df['salarios']:
-                str_ = str(i)
-                str_ = str_.replace("A Combinar", "0")\
-                    .replace("De R$", "")\
-                    .replace("a R$", "")\
-                    .replace(",00", "") \
-                    .replace("Acima de R$ ", "") \
-                    .replace("Até R$ ", "") \
-                    .replace(".", "").split()
-                for i in str_:
-                    i = float(i)
-                    soma += i
-                    if i > 0:
-                        i = 1
-                        count_ += i
+        vetor_salario_vagas = []
+        for i in PesquisaCargo(self.pesquisa).ConjuntoLink():
+            go = requests.get(i)
+            v = BeautifulSoup(go.text, 'html.parser')
+            v = v.find(id='search-result')
+            v = v.find_all('header')
+            for i in v:
+                for j in i:
+                    v = j.find_all('div')
+                    v = (v[2].text)
+                    vetor_salario_vagas.append(v)
+        return v
 
-            return print(f'Media Salarial para o cargo de {self.pesquisa}: {soma / count_} ')
-        else:
-            AnaliseArquivo(self.pesquisa).GeraArquivo()
-            AnaliseArquivo(self.pesquisa).MediaSalarial()
+
+
 
 
 

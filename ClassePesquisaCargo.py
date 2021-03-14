@@ -18,7 +18,7 @@ class PesquisaCargo():
         id_comum = "search-result"  # Classe de pagina sem vagas
         lista_unica = []
         lista_unica.append(self.link)
-        for iteracao in range(2, 10, 1):
+        for iteracao in range(2, 100, 1):
             link_formatado = self.link + PesquisaCargo(pesquisa, iteracao).FormataPesquisaParaLink()
             requests_paginas_formatadas = requests.get(link_formatado).text
             if id_comum in requests_paginas_formatadas:
@@ -82,11 +82,17 @@ class PesquisaCargo():
             v = v.find(id='search-result')
             v = v.find_all('header')
             for i in v:
-                vetor_localizacao_vagas.append(i.button.string)
+                vetor_localizacao_vagas.append(i.button.string
+                                               .replace(" (1)", "")
+                                               .replace(" (2)", "")
+                                               .replace(" (3)", "")
+                                               .replace(" (4)", "")
+                                               .replace(" (5)", ""))
         return pd.DataFrame({'localizacao': vetor_localizacao_vagas})
 
     def PegaSalarioJob(self):
         vetor_salario_vagas = []
+        vetor_salario_media = []
         for i in self.ConjuntoLink():
             go = requests.get(i)
             v = BeautifulSoup(go.text, 'html.parser')
@@ -96,7 +102,21 @@ class PesquisaCargo():
                 for j in i:
                     v = j.find_all('div')
                     vetor_salario_vagas.append(v[2].text)
-        return pd.DataFrame({'salario': vetor_salario_vagas})
+
+        for i in vetor_salario_vagas:
+            str(i)
+            v = i.replace("A Combinar", "0") \
+                .replace("De R$", "") \
+                .replace("a R$", "") \
+                .replace(",00", "") \
+                .replace("Acima de R$ ", "") \
+                .replace("Até R$ ", "") \
+                .replace(".", "").split()
+            v = [int(elem) for elem in v]
+            v = sum(v) / len(v)
+            vetor_salario_media.append(round(v))
+
+        return pd.DataFrame({'salario': vetor_salario_media})
 
     def PegaDtPubliJob(self):
         vetor_dtpupli_vagas = []
