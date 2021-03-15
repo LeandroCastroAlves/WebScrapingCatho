@@ -8,6 +8,7 @@ import os
 class DadosPesquisa():
 
     def __init__(self, pesquisa=None, loop=None, estado=None):
+
         self.estado = f"{estado}/"
         self.loop = loop
         self.pesquisa = pesquisa
@@ -16,14 +17,15 @@ class DadosPesquisa():
             self.link = f"https://www.catho.com.br/vagas/{self.valor_pesquisa_traco}/"
         elif estado is not None:
             self.link = f"https://www.catho.com.br/vagas/{self.valor_pesquisa_traco}/{self.estado}"
-
+        if len(self.pesquisa) == 0:
+            self.link = "https://www.catho.com.br/vagas"
     def ConjuntoLink(self):
         pesquisa = self.pesquisa
         id_comum = "search-result"  # Classe de pagina sem vagas
         lista_unica = []
         lista_unica.append(self.link)
-        for iteracao in range(2, 100, 1):
-            link_formatado = self.link + DadosPesquisa(pesquisa, iteracao).FormataPesquisaParaLink()
+        for interacao in range(2, 1000, 1):
+            link_formatado = self.link + DadosPesquisa(pesquisa, interacao).FormataPesquisaParaLink()
             requests_paginas_formatadas = requests.get(link_formatado).text
             if id_comum in requests_paginas_formatadas:
                 lista_unica.append(link_formatado)
@@ -44,6 +46,8 @@ class DadosPesquisa():
             return string_if
         elif i_len == 1:
             string_if = "?q=" + pesquisa + "&page=" + str(self.loop)
+        elif i_len == 0:
+            string_if = "?page=" + str(self.loop)
         return string_if
 
 
@@ -83,6 +87,8 @@ class DadosPesquisa():
 
     def PegaLocalizacaoJob(self):
         vetor_localizacao_vagas = []
+        cidade = []
+        estado = []
         for i in self.ConjuntoLink():
             go = requests.get(i)
             v = BeautifulSoup(go.text, 'html.parser')
@@ -94,8 +100,15 @@ class DadosPesquisa():
                                                .replace(" (2)", "")
                                                .replace(" (3)", "")
                                                .replace(" (4)", "")
-                                               .replace(" (5)", ""))
-        return pd.DataFrame({'localizacao': vetor_localizacao_vagas})
+                                               .replace(" (5)", "")
+                                               .split(sep="-"))
+
+        for i in vetor_localizacao_vagas:
+            cidade.append(i[0])
+            estado.append(i[1])
+        df = pd.DataFrame({"cidade": cidade,
+                           "estado": estado})
+        return df
 
     def PegaSalarioJob(self):
         vetor_salario_vagas = []
@@ -131,11 +144,10 @@ class DadosPesquisa():
             go = requests.get(i)
             v = BeautifulSoup(go.text, 'html.parser')
             v = v.find(id='search-result')
-            v = v.find_all('time')
+            v = v.find_all('li')
             for i in v:
-                v = i.span.string.split()[-1]
-                vetor_dtpupli_vagas.append(v)
-        return pd.DataFrame({'datapubl': vetor_dtpupli_vagas})
+                vetor_dtpupli_vagas.append(i.get("data-gtm-dimension-44").split("T")[0])
+        return pd.DataFrame({'datapubli': vetor_dtpupli_vagas})
 
     def PegaQtdJob(self):
         go = requests.get(self.link)
