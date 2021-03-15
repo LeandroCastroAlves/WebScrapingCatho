@@ -2,9 +2,6 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 
-
-
-
 def PegaLocalizacaoJob():
     vetor_salario_vagas = []
     vetor_salario_media = []

@@ -5,13 +5,17 @@ import pandas as pd
 import os
 
 # Classe para formatar o texto do link
-class PesquisaCargo():
+class DadosPesquisa():
 
-    def __init__(self, pesquisa, loop=0, valor_pesquisa_traco=""):
+    def __init__(self, pesquisa=None, loop=None, estado=None):
+        self.estado = f"{estado}/"
         self.loop = loop
         self.pesquisa = pesquisa
-        self.valor_pesquisa_traco = pesquisa.replace(" ", "-").replace("ã", "a").replace("ç", "c").replace("é", "e").replace("á", "a").lower()
-        self.link = f"https://www.catho.com.br/vagas/{self.valor_pesquisa_traco}/"
+        self.valor_pesquisa_traco = pesquisa.replace(" ", "-").replace("ã", "a").replace("ç", "c").replace("é","e").replace("á", "a").lower()
+        if estado is None:
+            self.link = f"https://www.catho.com.br/vagas/{self.valor_pesquisa_traco}/"
+        elif estado is not None:
+            self.link = f"https://www.catho.com.br/vagas/{self.valor_pesquisa_traco}/{self.estado}"
 
     def ConjuntoLink(self):
         pesquisa = self.pesquisa
@@ -19,7 +23,7 @@ class PesquisaCargo():
         lista_unica = []
         lista_unica.append(self.link)
         for iteracao in range(2, 100, 1):
-            link_formatado = self.link + PesquisaCargo(pesquisa, iteracao).FormataPesquisaParaLink()
+            link_formatado = self.link + DadosPesquisa(pesquisa, iteracao).FormataPesquisaParaLink()
             requests_paginas_formatadas = requests.get(link_formatado).text
             if id_comum in requests_paginas_formatadas:
                 lista_unica.append(link_formatado)
@@ -57,11 +61,14 @@ class PesquisaCargo():
                 v = BeautifulSoup(go.content.decode('UTF-8'), 'html.parser')
                 v = v.find_all(id='descricaoVagaTexto')
                 for i in v:
-                    v = i.text.replace("         ", "").replace('\n', '').replace("'", "").replace("    ", "")
+                    v = i.text.replace("         ", "")\
+                        .replace('\n', '')\
+                        .replace("'", "")\
+                        .replace("    ", "")
                     vetor_desc_vagas.append(v)
         return pd.DataFrame({'descricao': vetor_desc_vagas})
 
-        return vetor_desc_vagas
+
 
     def PegaNomeJob(self):
         vetor_nome_vagas = []
@@ -137,6 +144,31 @@ class PesquisaCargo():
         v = v.div.p.string
         v = v.replace("Total de anúncios: ", "").replace(".", "")
         return int(v)
+
+    def ConjuntoLinkDataFrame(self):
+        pesquisa = self.pesquisa
+        id_comum = "search-result"  # Classe de pagina sem vagas
+        lista_unica = []
+        lista_unica.append(self.link)
+        for iteracao in range(2, 100, 1):
+            link_formatado = self.link + DadosPesquisa(pesquisa, iteracao).FormataPesquisaParaLink()
+            requests_paginas_formatadas = requests.get(link_formatado).text
+            if id_comum in requests_paginas_formatadas:
+                lista_unica.append(link_formatado)
+            else:
+                break
+        return pd.DataFrame({'link': lista_unica})
+
+    def PegaLinkJobDataFrame(self):
+        vetor_link_vagas = []
+        for i in self.ConjuntoLink():
+            go = requests.get(i)
+            v = BeautifulSoup(go.text, 'html.parser')
+            v = v.find(id='search-result')
+            v = v.find_all('article')
+            for i in v:
+                vetor_link_vagas.append(i.div.h2.a.get('href'))
+        return pd.DataFrame({'link': vetor_link_vagas})
 
     def PesquisaFormat(self):
         return self.valor_pesquisa_traco
