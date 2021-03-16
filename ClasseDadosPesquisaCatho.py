@@ -29,7 +29,7 @@ class DadosPesquisa():
         id_comum = "search-result"  # Classe de pagina sem vagas
         lista_unica = []
         lista_unica.append(self.link)
-        for interacao in range(2, 10, 1):
+        for interacao in range(2, 10000, 1):
             link_formatado = self.link + DadosPesquisa(pesquisa, interacao).FormataPesquisaParaLink()
             requests_paginas_formatadas = requests.get(link_formatado).text
             if id_comum in requests_paginas_formatadas:
@@ -54,7 +54,7 @@ class DadosPesquisa():
         elif i_len == 1:
             string_if = "?q=" + pesquisa + "&page=" + str(self.loop)
         elif i_len == 0:
-            string_if = "?page=" + str(self.loop)
+            string_if = "/?page=" + str(self.loop)
         return string_if
 
     def PegaDescricaoJob(self):
@@ -80,11 +80,12 @@ class DadosPesquisa():
                             .replace("'", "") \
                             .replace("    ", "")
                         vetor_desc_vagas.append(v)
+            os.remove('Conjunto_Link.csv')
             return pd.DataFrame({'descricao': vetor_desc_vagas})
         else:
             DadosPesquisa(self.pesquisa).ConjuntoLink()
+            os.remove('Conjunto_Link.csv')
             return DadosPesquisa(self.pesquisa).PegaDescricaoJob()
-
 
     def PegaNomeJob(self):
         if os.path.isfile('Conjunto_Link.csv'):
@@ -100,7 +101,12 @@ class DadosPesquisa():
                 v = v.find_all('li')
                 for i in v:
                     vetor_nome_vagas.append(i.h2.a.string)
+            os.remove('Conjunto_Link.csv')
             return pd.DataFrame({'nome': vetor_nome_vagas})
+        else:
+            DadosPesquisa(self.pesquisa).ConjuntoLink()
+            os.remove('Conjunto_Link.csv')
+            return DadosPesquisa(self.pesquisa).PegaNomeJob()
 
     def PegaLocalizacaoJob(self):
 
@@ -145,9 +151,11 @@ class DadosPesquisa():
                 estado.append(i[1])
             df = pd.DataFrame({"cidade": cidade,
                                "estado": estado})
+            os.remove('Conjunto_Link.csv')
             return df
         else:
             DadosPesquisa(self.pesquisa).ConjuntoLink()
+            os.remove('Conjunto_Link.csv')
             return DadosPesquisa(self.pesquisa).PegaLocalizacaoJob()
 
     def PegaSalarioJob(self):
@@ -180,9 +188,11 @@ class DadosPesquisa():
                 v = [int(elem) for elem in v]
                 v = sum(v) / len(v)
                 vetor_salario_media.append(round(v))
+            os.remove('Conjunto_Link.csv')
             return pd.DataFrame({'salario': vetor_salario_media})
         else:
             DadosPesquisa(self.pesquisa).ConjuntoLink()
+            os.remove('Conjunto_Link.csv')
             return DadosPesquisa(self.pesquisa).PegaSalarioJob()
 
     def PegaDtPubliJob(self):
@@ -200,9 +210,11 @@ class DadosPesquisa():
                 v = v.find_all('li')
                 for i in v:
                     vetor_dtpupli_vagas.append(i.get("data-gtm-dimension-44").split("T")[0])
+            os.remove('Conjunto_Link.csv')
             return pd.DataFrame({'datapubli': vetor_dtpupli_vagas})
         else:
             DadosPesquisa(self.pesquisa).ConjuntoLink()
+            os.remove('Conjunto_Link.csv')
             return DadosPesquisa(self.pesquisa).PegaDtPubliJob()
 
     def PegaQtdJob(self):
@@ -219,7 +231,7 @@ class DadosPesquisa():
         id_comum = "search-result"  # Classe de pagina sem vagas
         lista_unica = []
         lista_unica.append(self.link)
-        for iteracao in range(2, 100, 1):
+        for iteracao in range(2, 1000000, 1):
             link_formatado = self.link + DadosPesquisa(pesquisa, iteracao).FormataPesquisaParaLink()
             requests_paginas_formatadas = requests.get(link_formatado).text
             if id_comum in requests_paginas_formatadas:
@@ -242,9 +254,11 @@ class DadosPesquisa():
                 v = v.find_all('article')
                 for i in v:
                     vetor_link_vagas.append(i.div.h2.a.get('href'))
+            os.remove('Conjunto_Link.csv')
             return pd.DataFrame({'link': vetor_link_vagas})
         else:
             DadosPesquisa(self.pesquisa).ConjuntoLink()
+            os.remove('Conjunto_Link.csv')
             return DadosPesquisa(self.pesquisa).PegaLinkJobDataFrame()
 
     def PesquisaFormat(self):

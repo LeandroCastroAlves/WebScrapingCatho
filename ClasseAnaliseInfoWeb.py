@@ -23,6 +23,7 @@ class AnaliseArquivo():
             .to_csv(f'{self.valor_pesquisa_traco}.csv', index=None)
         os.remove('Conjunto_Link.csv')
         return arquivo
+
     def GeraDf(self):
         cont_int = int(str(self.encontrados).split()[0])
         print(f"Total de anuncios {cont_int}")

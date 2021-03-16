@@ -9,15 +9,15 @@ from ClasseAnaliseInfoWeb import AnaliseArquivo
 import plotly.graph_objects as go
 
 
-#print(DadosPesquisa(pesquisa="engenheiro de dados").PegaDtPubliJob())
-#print(AnaliseArquivo(pesquisa="engenheiro de dados").GeraArquivocsv())
+#print(DadosPesquisa(pesquisa="engenheiro de dados").PegaLinkJobDataFrame())
+
 
 
 
 #print(AnaliseArquivo(pesquisa="engenheiro de dados").GeraArquivocsv())
 #print(AnaliseArquivo(pesquisa="").GeraArquivocsv())
 #print(DadosPesquisa(pesquisa="").PegaDescricaoJob())
-print(AnaliseArquivo(pesquisa="").GeraArquivocsv())
+print(AnaliseArquivo(pesquisa="engenheiro de dados").GeraArquivocsv())
 
 
 
