@@ -18,7 +18,6 @@ class AnaliseArquivo():
             .join(DadosPesquisa(self.pesquisa).PegaNomeJob())\
             .join(DadosPesquisa(self.pesquisa).PegaLocalizacaoJob())\
             .join(DadosPesquisa(self.pesquisa).PegaSalarioJob())\
-            .join(DadosPesquisa(self.pesquisa).PegaDescricaoJob()) \
             .join(DadosPesquisa(self.pesquisa).PegaLinkJobDataFrame()) \
             .to_csv(f'{self.valor_pesquisa_traco}.csv', index=None)
         os.remove('Conjunto_Link.csv')

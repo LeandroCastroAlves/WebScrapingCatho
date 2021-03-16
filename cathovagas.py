@@ -6,6 +6,7 @@ import requests
 from bs4 import BeautifulSoup
 from ClasseDadosPesquisaCatho import DadosPesquisa
 from ClasseAnaliseInfoWeb import AnaliseArquivo
+from ClasseAnaliseArquivoCsv import EstatisticasArquivo
 
 
 
@@ -15,10 +16,11 @@ from ClasseAnaliseInfoWeb import AnaliseArquivo
 
 
 #print(AnaliseArquivo(pesquisa="engenheiro de dados").GeraArquivocsv())
-#print(AnaliseArquivo(pesquisa="").GeraArquivocsv())
-#print(DadosPesquisa(pesquisa="").PegaDescricaoJob())
-print(AnaliseArquivo(pesquisa="engenheiro de dados").GeraArquivocsv())
+print(AnaliseArquivo(pesquisa="").GeraArquivocsv())
+#print(DadosPesquisa(pesquisa="cientista de dados").PegaSalarioJob())
+#print(AnaliseArquivo(pesquisa="cientista de dados").)
 
+#EstatisticasArquivo('engenheiro-de-dados.csv').MediaGeral()
 
 
 

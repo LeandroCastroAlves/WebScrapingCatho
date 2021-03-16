@@ -11,7 +11,7 @@ class EstatisticasArquivo():
     def df_salario_full(self):
         df_fil_sal = self.df['salario'] > 0
         df_sal_full = self.df[df_fil_sal]
-        print(df_sal_full)
+        return df_sal_full
 
     def SalarioPorRegiao(self):
         df = self.df_salario_full()

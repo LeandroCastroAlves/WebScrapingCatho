@@ -1,27 +1,33 @@
+import os
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-
-
+from math import floor
 
 #//*[@id="search-result"]/div[2]/nav/a[6]
 from ClasseDadosPesquisaCatho import DadosPesquisa
 
+def PegaDtPubliJob():
+    if os.path.isfile('Conjunto_Link.csv'):
+        interacao = pd.read_csv('Conjunto_Link.csv')
+        link = []
+        for i in interacao['0']:
+            link.append(i)
+        print(link)
+        vetor_dtpupli_vagas = []
+        for j, i in enumerate(link):
+            print(j)
+            go = requests.get(i)
+            v = BeautifulSoup(go.text, 'html.parser')
+            v = v.find(id='search-result')
+            v = v.find_all('li')
+            for i in v:
+                vetor_dtpupli_vagas.append(i.get("data-gtm-dimension-44").split("T")[0])
+        return pd.DataFrame({'datapubli': vetor_dtpupli_vagas})
+    else:
+        DadosPesquisa(self.pesquisa).ConjuntoLink()
+        return DadosPesquisa(self.pesquisa).PegaDtPubliJob()
 
-pesquisa = "apresentador"
-        id_comum = "search-result"  # Classe de pagina sem vagas
-        lista_unica = []
-        lista_unica.append(self.link)
-        for interacao in range(3, 5, 1):
-            print(interacao)
-            link_formatado = self.link + DadosPesquisa(pesquisa, interacao).FormataPesquisaParaLink()
-            print(link_formatado)
-            requests_paginas_formatadas = requests.get(link_formatado).text
-            if id_comum in requests_paginas_formatadas:
-                lista_unica.append(link_formatado)
-            else:
-                break
-        pd.DataFrame(lista_unica).to_csv('Conjunto_Link.csv')
-        return lista_unica
-for i in range(2, 5, 1):
-    print(DadosPesquisa("apresentador", i).FormataPesquisaParaLink())
+    PegaDtPubliJob()
+x = 1 + 1
+print(x)

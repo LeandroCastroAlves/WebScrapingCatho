@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-import csv
+from math import floor
 import pandas as pd
 import os
 
@@ -25,22 +25,19 @@ class DadosPesquisa():
     def ConjuntoLink(self):
 
         pesquisa = self.pesquisa
-        id_comum = "search-result"  # Classe de pagina sem vagas
         lista_unica = []
         lista_unica.append(self.link)
-        x = round(DadosPesquisa(pesquisa).PegaQtdJob() / 20) + 1
+        x = round(DadosPesquisa(pesquisa).PegaQtdJob() / 20)+2
         print(x)
         for interacao in range(2, x, 1):
-            print(interacao)
             link_formatado = self.link + DadosPesquisa(pesquisa, loop=interacao).FormataPesquisaParaLink()
             print(link_formatado)
             lista_unica.append(link_formatado)
-        print(lista_unica)
-        pd.DataFrame(lista_unica).to_csv('Conjunto_Link.csv')
-        return pd.DataFrame(lista_unica).to_csv('Conjunto_Link.csv')
+        return pd.DataFrame(lista_unica).to_csv('Conjunto_Link.csv', sep=",", index=False, columns=None)
 
     def FormataPesquisaParaLink(self):
 
+        global string_if
         pesquisa = self.pesquisa.replace("ã", "a").replace("ç", "c").replace("é", "e").lower()
         string = ""
         item = pesquisa.split()
@@ -57,7 +54,30 @@ class DadosPesquisa():
             string_if = "/?page=" + str(self.loop)
         return string_if
 
+    def PegaDtPubliJob(self):
+
+        if os.path.isfile('Conjunto_Link.csv'):
+            interacao = pd.read_csv('Conjunto_Link.csv')
+            link = []
+            for i in interacao['0']:
+                link.append(i)
+            print(link)
+            vetor_dtpupli_vagas = []
+            for j, i in enumerate(link):
+                print(j)
+                go = requests.get(i)
+                v = BeautifulSoup(go.text, 'html.parser')
+                v = v.find(id='search-result')
+                v = v.find_all('li')
+                for i in v:
+                    vetor_dtpupli_vagas.append(i.get("data-gtm-dimension-44").split("T")[0])
+            return pd.DataFrame({'datapubli': vetor_dtpupli_vagas})
+        else:
+            DadosPesquisa(self.pesquisa).ConjuntoLink()
+            return DadosPesquisa(self.pesquisa).PegaDtPubliJob()
+
     def PegaDescricaoJob(self):
+
         if os.path.isfile('Conjunto_Link.csv'):
             interacao = pd.read_csv('Conjunto_Link.csv')
             link = []
@@ -194,28 +214,6 @@ class DadosPesquisa():
             DadosPesquisa(self.pesquisa).ConjuntoLink()
 
             return DadosPesquisa(self.pesquisa).PegaSalarioJob()
-
-    def PegaDtPubliJob(self):
-
-        if os.path.isfile('Conjunto_Link.csv'):
-            interacao = pd.read_csv('Conjunto_Link.csv')
-            link = []
-            for i in interacao['0']:
-                link.append(i)
-            vetor_dtpupli_vagas = []
-            for i in link:
-                go = requests.get(i)
-                v = BeautifulSoup(go.text, 'html.parser')
-                v = v.find(id='search-result')
-                v = v.find_all('li')
-                for i in v:
-                    vetor_dtpupli_vagas.append(i.get("data-gtm-dimension-44").split("T")[0])
-
-            return pd.DataFrame({'datapubli': vetor_dtpupli_vagas})
-        else:
-            DadosPesquisa(self.pesquisa).ConjuntoLink()
-
-            return DadosPesquisa(self.pesquisa).PegaDtPubliJob()
 
     def PegaQtdJob(self):
         go = requests.get(self.link)
