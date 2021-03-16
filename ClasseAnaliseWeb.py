@@ -1,7 +1,6 @@
 import pandas as pd
 import pandas as pd
-import plotly.offline as py
-import plotly.graph_objs as go
+
 from ClasseAnaliseInfoWeb import AnaliseArquivo
 
 class EstatisticasArquivo():
