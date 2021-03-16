@@ -4,25 +4,13 @@ import pandas as pd
 
 
 
-def i(go=None):
-    df = pd.read_csv('engenheiro-de-dados.csv', sep=";")
-    j = []
-    for i in df['estado']:
-        print(i.split()[0])
-        j.append(i.split()[0])
-    dfJ = pd.DataFrame(j)
-    df['estado'] = dfJ
-    print(df['estado'].values)
-    df.to_csv('engenheiro-de-dados.csv', index=None)
-
-    df = pd.read_csv('engenheiro-de-dados.csv')
-    df = df.rename({'Unnamed: 0': 'id'})
-    print(df)
-
-
-
-    go.Scatter(x=list(i['salariomedia']), y=list(i['estado']),
-                   mode='lines',
-                   name='Gráfico com linhas tracejadas',
-                   )
-
+#//*[@id="search-result"]/div[2]/nav/a[6]
+def PegaQtdJob():
+    go = requests.get("https://www.catho.com.br/vagas/engenheiro%20de%20dados/")
+    v = BeautifulSoup(go.text, 'html.parser')
+    v = v.find(id='search-result')
+    v = v.div.p.string
+    v = v.replace("Total de anúncios: ", "").replace(".", "")
+    v = int(v)
+    return v
+print(round(PegaQtdJob()) + 1)

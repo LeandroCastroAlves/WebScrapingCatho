@@ -29,7 +29,7 @@ class DadosPesquisa():
         id_comum = "search-result"  # Classe de pagina sem vagas
         lista_unica = []
         lista_unica.append(self.link)
-        for interacao in range(2, 10000, 1):
+        for interacao in range(2, int(((DadosPesquisa(self.link).PegaQtdJob()/20) + 1)), 1):
             link_formatado = self.link + DadosPesquisa(pesquisa, interacao).FormataPesquisaParaLink()
             requests_paginas_formatadas = requests.get(link_formatado).text
             if id_comum in requests_paginas_formatadas:
@@ -223,22 +223,9 @@ class DadosPesquisa():
         v = v.find(id='search-result')
         v = v.div.p.string
         v = v.replace("Total de anúncios: ", "").replace(".", "")
-        return int(v)
+        v = int(v)
+        return v
 
-    def ConjuntoLinkDataFrame(self):
-
-        pesquisa = self.pesquisa
-        id_comum = "search-result"  # Classe de pagina sem vagas
-        lista_unica = []
-        lista_unica.append(self.link)
-        for iteracao in range(2, 1000000, 1):
-            link_formatado = self.link + DadosPesquisa(pesquisa, iteracao).FormataPesquisaParaLink()
-            requests_paginas_formatadas = requests.get(link_formatado).text
-            if id_comum in requests_paginas_formatadas:
-                lista_unica.append(link_formatado)
-            else:
-                break
-        return pd.DataFrame({'link': lista_unica})
     def PegaLinkJobDataFrame(self):
 
         if os.path.isfile('Conjunto_Link.csv'):

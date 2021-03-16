@@ -17,7 +17,7 @@ import plotly.graph_objects as go
 #print(AnaliseArquivo(pesquisa="engenheiro de dados").GeraArquivocsv())
 #print(AnaliseArquivo(pesquisa="").GeraArquivocsv())
 #print(DadosPesquisa(pesquisa="").PegaDescricaoJob())
-print(AnaliseArquivo(pesquisa="engenheiro de dados").GeraArquivocsv())
+print(AnaliseArquivo(pesquisa="enfermeira").GeraArquivocsv())
 
 
 
