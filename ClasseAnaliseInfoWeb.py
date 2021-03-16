@@ -14,14 +14,15 @@ class AnaliseArquivo():
         cont_int = int(str(self.encontrados).split()[0])
         print(f"Total de anuncios {cont_int}")
         print(f'Por favor aguarde o rastreio das informações, isso pode demorar um pouco...')
-        return DadosPesquisa(self.pesquisa).PegaDtPubliJob()\
+        arquivo = DadosPesquisa(self.pesquisa).PegaDtPubliJob()\
             .join(DadosPesquisa(self.pesquisa).PegaNomeJob())\
             .join(DadosPesquisa(self.pesquisa).PegaLocalizacaoJob())\
             .join(DadosPesquisa(self.pesquisa).PegaSalarioJob())\
             .join(DadosPesquisa(self.pesquisa).PegaDescricaoJob()) \
             .join(DadosPesquisa(self.pesquisa).PegaLinkJobDataFrame()) \
-            .to_csv(f'{self.valor_pesquisa_traco}.csv', sep=";")
-
+            .to_csv(f'{self.valor_pesquisa_traco}.csv', index=None)
+        os.remove('Conjunto_Link.csv')
+        return arquivo
     def GeraDf(self):
         cont_int = int(str(self.encontrados).split()[0])
         print(f"Total de anuncios {cont_int}")

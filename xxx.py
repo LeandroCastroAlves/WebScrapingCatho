@@ -4,7 +4,7 @@ import pandas as pd
 
 
 
-def i():
+def i(go=None):
     df = pd.read_csv('engenheiro-de-dados.csv', sep=";")
     j = []
     for i in df['estado']:
@@ -15,13 +15,14 @@ def i():
     print(df['estado'].values)
     df.to_csv('engenheiro-de-dados.csv', index=None)
 
-df = pd.read_csv('engenheiro-de-dados.csv')
-df = df.rename({'Unnamed: 0': 'id'})
-print(df)
+    df = pd.read_csv('engenheiro-de-dados.csv')
+    df = df.rename({'Unnamed: 0': 'id'})
+    print(df)
 
 
 
-go.Scatter(x=list(i['salariomedia']), y=list(i['estado']),
+    go.Scatter(x=list(i['salariomedia']), y=list(i['estado']),
                    mode='lines',
                    name='Gráfico com linhas tracejadas',
                    )
+
