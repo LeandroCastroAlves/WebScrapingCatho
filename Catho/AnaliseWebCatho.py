@@ -1,7 +1,4 @@
-import pandas as pd
-import pandas as pd
-
-from ClasseGeraArquivoCsvEdf import AnaliseArquivo
+from Catho.GeraArquivoCsvCatho import AnaliseArquivo
 
 class EstatisticasWeb():
 

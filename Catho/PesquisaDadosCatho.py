@@ -34,7 +34,7 @@ class DadosPesquisa():
         for interacao in range(2, x, 1):
             link_formatado = self.link + DadosPesquisa(pesquisa, loop=interacao).FormataPesquisaParaLink()
             lista_unica.append(link_formatado)
-        return pd.DataFrame(lista_unica).to_csv('Conjunto_Link.csv', sep=",", index=False, columns=None)
+        return pd.DataFrame(lista_unica).to_csv('Catho\Conjunto_Link_Catho.csv', sep=",", index=False, columns=None)
 
     def FormataPesquisaParaLink(self):
         global string_if
@@ -61,7 +61,7 @@ class DadosPesquisa():
     def PegaDtPubliJob(self):
         print("Data")
 
-        interacao = pd.read_csv('Conjunto_Link.csv')
+        interacao = pd.read_csv('Catho\Conjunto_Link_Catho.csv')
         link = []
         for i in interacao['0']:
             link.append(i)
@@ -79,7 +79,7 @@ class DadosPesquisa():
     def PegaLinkDescricaoJob(self):
         print("Descricao")
 
-        interacao = pd.read_csv('Conjunto_Link.csv')
+        interacao = pd.read_csv('Catho\Conjunto_Link_Catho.csv')
         link = []
         for i in interacao['0']:
             link.append(i)
@@ -98,7 +98,7 @@ class DadosPesquisa():
     def PegaDescricaoJobBackup(self):
         print("Descricao")
 
-        interacao = pd.read_csv('Conjunto_Link.csv')
+        interacao = pd.read_csv('Catho\Conjunto_Link_Catho.csv')
         link = []
         for i in interacao['0']:
             link.append(i)
@@ -125,7 +125,7 @@ class DadosPesquisa():
     def PegaNomeJob(self):
         print("Nome")
 
-        interacao = pd.read_csv('Conjunto_Link.csv')
+        interacao = pd.read_csv('Catho\Conjunto_Link_Catho.csv')
         link = []
         for i in interacao['0']:
             link.append(i)
@@ -142,8 +142,7 @@ class DadosPesquisa():
 
     def PegaLocalizacaoJob(self):
         print("Localizacao")
-
-        interacao = pd.read_csv('Conjunto_Link.csv')
+        interacao = pd.read_csv('Catho\Conjunto_Link_Catho.csv')
         link = []
         for i in interacao['0']:
             link.append(i)
@@ -157,40 +156,43 @@ class DadosPesquisa():
             v = v.find(id='search-result')
             v = v.find_all('header')
             for i in v:
+                print(i.button.string)
                 vetor_localizacao_vagas.append(i
                                                .button
                                                .string
-                                               .replace(" (1)", "")
-                                               .replace(" (2)", "")
-                                               .replace(" (3)", "")
-                                               .replace(" (4)", "")
-                                               .replace(" (5)", "")
-                                               .replace(" (6)", "")
-                                               .replace(" (7)", "")
-                                               .replace(" (8)", "")
-                                               .replace(" (9)", "")
-                                               .replace(" (10)", "")
-                                               .replace(" (11)", "")
-                                               .replace(" (12)", "")
-                                               .replace(" (13)", "")
-                                               .replace(" (14)", "")
-                                               .replace(" (15)", "")
-                                               .replace(" (16)", "")
-                                               .replace(" (17)", "")
-                                               .replace(" (18)", "")
-                                               .replace(" (19)", "")
-                                               .replace(" (20)", "")
-                                               .split(sep="-"))
+                                               #.replace("-", "")
+                                               .replace("(1)", "")
+                                               .replace("(2)", "")
+                                               .replace("(3)", "")
+                                               .replace("(4)", "")
+                                               .replace("(5)", "")
+                                               .replace("(6)", "")
+                                               .replace("(7)", "")
+                                               .replace("(8)", "")
+                                               .replace("(9)", "")
+                                               .replace("(10)", "")
+                                               .replace("(11)", "")
+                                               .replace("(12)", "")
+                                               .replace("(13)", "")
+                                               .replace("(14)", "")
+                                               .replace("(15)", "")
+                                               .replace("(16)", "")
+                                               .replace("(17)", "")
+                                               .replace("(18)", "")
+                                               .replace("(19)", "")
+                                               .replace("(20)", "")
+                                               .split("-"))
         for i in vetor_localizacao_vagas:
+            print(i)
             cidade.append(i[0])
-            estado.append(i[1])
+            estado.append(i[-1])
         df = pd.DataFrame({"cidade": cidade, "estado": estado})
         return df
 
     def PegaLocalizacaoJobBackup(self):
         print("Localizacao")
 
-        interacao = pd.read_csv('Conjunto_Link.csv')
+        interacao = pd.read_csv('Catho\Conjunto_Link_Catho.csv')
         link = []
         for i in interacao['0']:
             link.append(i)
@@ -239,7 +241,7 @@ class DadosPesquisa():
         vetor_salario_vagas = []
         vetor_salario_media = []
 
-        interacao = pd.read_csv('Conjunto_Link.csv')
+        interacao = pd.read_csv('Catho\Conjunto_Link_Catho.csv')
         link = []
         for i in interacao['0']:
             link.append(i)
@@ -281,7 +283,7 @@ class DadosPesquisa():
     def PegaLinkJobDataFrame(self):
         print("Link")
 
-        interacao = pd.read_csv('Conjunto_Link.csv')
+        interacao = pd.read_csv('Catho\Conjunto_Link_Catho.csv')
         link = []
         for i in interacao['0']:
             link.append(i)

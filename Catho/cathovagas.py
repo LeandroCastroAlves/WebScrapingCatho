@@ -5,11 +5,11 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
-from ClasseAnaliseWeb import EstatisticasWeb
-from ClassePesquisaDados import DadosPesquisa
-from ClasseGeraArquivoCsvEdf import AnaliseArquivo
-from ClasseAnaliseArquivoCsv import EstatisticasArquivo
-
+from AnaliseWebCatho import EstatisticasWeb
+from PesquisaDadosCatho import DadosPesquisa
+from GeraArquivoCsvCatho import AnaliseArquivo
+from AnaliseArquivoCsvCatho import EstatisticasArquivo
+print(DadosPesquisa(pesquisa="cientista de dados").PegaLocalizacaoJob())
 
 #EstatisticasWeb("engenheiro de alimentos").SalarioPorRegiao()
 
@@ -20,7 +20,7 @@ from ClasseAnaliseArquivoCsv import EstatisticasArquivo
 
 #a = AnaliseArquivo(pesquisa="manaus").GeraArquivoCsvBackup()
 #print(AnaliseArquivo(pesquisa="mg").GeraArquivoCsvBackup())
-print(DadosPesquisa(pesquisa="mg").PegaLocalizacaoJob())
+
 #print(AnaliseArquivo(pesquisa="cientista de dados").)
 
 #EstatisticasArquivo('mgBK.csv').SalarioPorRegiao()

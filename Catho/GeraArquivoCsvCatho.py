@@ -4,7 +4,7 @@ import time
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-from ClassePesquisaDados import DadosPesquisa
+from PesquisaDadosCatho import DadosPesquisa
 import os
 import threading
 
@@ -16,7 +16,7 @@ class AnaliseArquivo():
                                                                                                            "e").lower()
 
     def GeraArquivoCsvBackup(self):
-        if os.path.isfile('Conjunto_link.csv'):
+        if os.path.isfile('Conjunto_Link.csv'):
             cont_int = int(str(self.encontrados).split()[0])
             print(f"Total de anuncios {cont_int}")
             print(f'Por favor aguarde o rastreio das informações, isso pode demorar um pouco...')
@@ -41,7 +41,7 @@ class AnaliseArquivo():
 
 
     def GeraDf(self):
-        if os.path.isfile('Conjunto_link.csv'):
+        if os.path.isfile('Conjunto_Link.csv'):
             cont_int = int(str(self.encontrados).split()[0])
             print(f"Total de anuncios {cont_int}")
             print(f'Por favor aguarde o rastreio das informações, isso pode demorar um pouco...')

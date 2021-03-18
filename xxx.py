@@ -2,14 +2,13 @@ import os
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-from math import floor
 
 #//*[@id="search-result"]/div[2]/nav/a[6]
-from ClassePesquisaDados import DadosPesquisa
+from Catho.PesquisaDadosCatho import DadosPesquisa
 
 def PegaDtPubliJob():
-    if os.path.isfile('Conjunto_Link.csv'):
-        interacao = pd.read_csv('Conjunto_Link.csv')
+    if os.path.isfile('Catho/Conjunto_Link.csv'):
+        interacao = pd.read_csv('Catho/Conjunto_Link.csv')
         link = []
         for i in interacao['0']:
             link.append(i)
