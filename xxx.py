@@ -5,7 +5,7 @@ import pandas as pd
 from math import floor
 
 #//*[@id="search-result"]/div[2]/nav/a[6]
-from ClasseDadosPesquisaCatho import DadosPesquisa
+from ClassePesquisaDados import DadosPesquisa
 
 def PegaDtPubliJob():
     if os.path.isfile('Conjunto_Link.csv'):

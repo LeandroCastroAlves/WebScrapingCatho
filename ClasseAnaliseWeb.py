@@ -1,11 +1,12 @@
 import pandas as pd
 import pandas as pd
 
-from ClasseAnaliseInfoWeb import AnaliseArquivo
+from ClasseGeraArquivoCsvEdf import AnaliseArquivo
 
-class EstatisticasArquivo():
+class EstatisticasWeb():
 
-    def __init__(self, df=AnaliseArquivo('gerente-farmaceutico').GeraDf()):
+    def __init__(self, pesquisa):
+        df = AnaliseArquivo(pesquisa).GeraDf()
         self.df = df
 
     def df_salario_full(self):
@@ -32,4 +33,3 @@ class EstatisticasArquivo():
         df['salario'].max()
 
 
-EstatisticasArquivo().SalarioPorRegiao()

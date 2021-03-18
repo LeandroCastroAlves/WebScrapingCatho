@@ -15,12 +15,12 @@ class EstatisticasArquivo():
 
     def SalarioPorRegiao(self):
         df = self.df_salario_full()
-        print(df[["estado", "salario"]].groupby("estado").mean())
+        print(df[["estado", "salario"]].groupby("estado").mean().sort_values(['salario', 'estado']))
 
     def SalarioPorCidade(self):
 
         df = self.df_salario_full()
-        print(df[["cidade", "salario"]].groupby("cidade").mean())
+        print(df[["cidade", "salario"]].groupby("cidade").mean().sort_values(['salario', 'cidade']))
         print(df[['cidade', 'salario']].describe())
 
     def MediaGeral(self):

@@ -4,23 +4,28 @@ import os
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-from ClasseDadosPesquisaCatho import DadosPesquisa
-from ClasseAnaliseInfoWeb import AnaliseArquivo
+
+from ClasseAnaliseWeb import EstatisticasWeb
+from ClassePesquisaDados import DadosPesquisa
+from ClasseGeraArquivoCsvEdf import AnaliseArquivo
 from ClasseAnaliseArquivoCsv import EstatisticasArquivo
 
 
+#EstatisticasWeb("engenheiro de alimentos").SalarioPorRegiao()
 
-#print(DadosPesquisa(pesquisa="engenheiro de dados").PegaLinkJobDataFrame())
+#print(DadosPesquisa(pesquisa="engenheiro de dados").)
 
 
 
 
-#print(AnaliseArquivo(pesquisa="engenheiro de dados").GeraArquivocsv())
-print(AnaliseArquivo(pesquisa="").GeraArquivocsv())
-#print(DadosPesquisa(pesquisa="cientista de dados").PegaSalarioJob())
+#a = AnaliseArquivo(pesquisa="manaus").GeraArquivoCsvBackup()
+#print(AnaliseArquivo(pesquisa="mg").GeraArquivoCsvBackup())
+print(DadosPesquisa(pesquisa="mg").PegaLocalizacaoJob())
 #print(AnaliseArquivo(pesquisa="cientista de dados").)
 
-#EstatisticasArquivo('engenheiro-de-dados.csv').MediaGeral()
+#EstatisticasArquivo('mgBK.csv').SalarioPorRegiao()
+
+
 
 
 
