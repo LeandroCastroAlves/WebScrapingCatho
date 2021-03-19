@@ -150,7 +150,6 @@ class DadosPesquisa():
         cidade = []
         estado = []
         for j, i in enumerate(link):
-            print(j)
             go = requests.get(i)
             v = BeautifulSoup(go.text, 'html.parser')
             v = v.find(id='search-result')
@@ -170,18 +169,8 @@ class DadosPesquisa():
                                                .replace("(7)", "")
                                                .replace("(8)", "")
                                                .replace("(9)", "")
-                                               .replace("(10)", "")
-                                               .replace("(11)", "")
-                                               .replace("(12)", "")
-                                               .replace("(13)", "")
-                                               .replace("(14)", "")
-                                               .replace("(15)", "")
-                                               .replace("(16)", "")
-                                               .replace("(17)", "")
-                                               .replace("(18)", "")
-                                               .replace("(19)", "")
-                                               .replace("(20)", "")
-                                               .split("-"))
+                                               .split("0")
+                                               )
         for i in vetor_localizacao_vagas:
             print(i)
             cidade.append(i[0])

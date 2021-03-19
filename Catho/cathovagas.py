@@ -9,7 +9,7 @@ from AnaliseWebCatho import EstatisticasWeb
 from PesquisaDadosCatho import DadosPesquisa
 from GeraArquivoCsvCatho import AnaliseArquivo
 from AnaliseArquivoCsvCatho import EstatisticasArquivo
-print(DadosPesquisa(pesquisa="cientista de dados").PegaLocalizacaoJob())
+print(DadosPesquisa(pesquisa="uberaba").PegaLocalizacaoJob())
 
 #EstatisticasWeb("engenheiro de alimentos").SalarioPorRegiao()
 
@@ -19,7 +19,7 @@ print(DadosPesquisa(pesquisa="cientista de dados").PegaLocalizacaoJob())
 
 
 #a = AnaliseArquivo(pesquisa="manaus").GeraArquivoCsvBackup()
-#print(AnaliseArquivo(pesquisa="mg").GeraArquivoCsvBackup())
+#print(AnaliseArquivo(pesquisa="uberaba").GeraArquivoCsvBackup())
 
 #print(AnaliseArquivo(pesquisa="cientista de dados").)
 

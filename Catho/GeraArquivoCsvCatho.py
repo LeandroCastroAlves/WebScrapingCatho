@@ -16,7 +16,7 @@ class AnaliseArquivo():
                                                                                                            "e").lower()
 
     def GeraArquivoCsvBackup(self):
-        if os.path.isfile('Conjunto_Link.csv'):
+        if os.path.isfile('Catho\Conjunto_Link_Catho.csv'):
             cont_int = int(str(self.encontrados).split()[0])
             print(f"Total de anuncios {cont_int}")
             print(f'Por favor aguarde o rastreio das informações, isso pode demorar um pouco...')
@@ -32,8 +32,8 @@ class AnaliseArquivo():
                 .join(future3.result())\
                 .join(future4.result())\
                 .join(future5.result())\
-                .to_csv(f'{self.valor_pesquisa_traco}.csv', index=None)
-            os.remove('Conjunto_Link.csv')
+                .to_csv(f'Catho\{self.valor_pesquisa_traco}.csv', index=None)
+            os.remove('Catho\Conjunto_Link_Catho.csv')
             return df
         else:
             DadosPesquisa(self.pesquisa).ConjuntoLink()
