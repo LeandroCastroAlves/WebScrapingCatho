@@ -30,7 +30,7 @@ class DadosPesquisa():
         lista_unica = []
         lista_unica.append(self.link)
         x = round(DadosPesquisa(pesquisa).PegaQtdJob() / 20) + 1
-        print(x)
+        print(f"Total de paginas: {x}")
         for interacao in range(2, x, 1):
             link_formatado = self.link + DadosPesquisa(pesquisa, loop=interacao).FormataPesquisaParaLink()
             lista_unica.append(link_formatado)
@@ -59,7 +59,7 @@ class DadosPesquisa():
         return string_if
 
     def PegaDtPubliJob(self):
-        print("Data")
+        print("Buscando: Data")
 
         interacao = pd.read_csv('Catho\Conjunto_Link_Catho.csv')
         link = []
@@ -67,7 +67,7 @@ class DadosPesquisa():
             link.append(i)
         vetor_dtpupli_vagas = []
         for j, i in enumerate(link):
-            print(j)
+            print("Data: ", j)
             go = requests.get(i)
             v = BeautifulSoup(go.text, 'html.parser')
             v = v.find(id='search-result')
@@ -77,7 +77,7 @@ class DadosPesquisa():
         return pd.DataFrame({'datapubli': vetor_dtpupli_vagas})
 
     def PegaLinkDescricaoJob(self):
-        print("Descricao")
+        print("Buscando: Descricao")
 
         interacao = pd.read_csv('Catho\Conjunto_Link_Catho.csv')
         link = []
@@ -85,7 +85,7 @@ class DadosPesquisa():
             link.append(i)
         vetor_desc_vagas = []
         for j, i in enumerate(link):
-            print(j)
+            print("Descricao:", j)
             go = requests.get(i)
             v = BeautifulSoup(go.text, 'html.parser')
             v = v.find(id='search-result')
@@ -95,10 +95,9 @@ class DadosPesquisa():
                 vetor_desc_vagas.append(link)
         return pd.DataFrame({'descricao': vetor_desc_vagas})
 
-    def PegaDescricaoJobBackup(self):
-        print("Descricao")
-
-        interacao = pd.read_csv('Catho\Conjunto_Link_Catho.csv')
+    def PegaDescricaoJob(self, arquivo):
+        print("Buscando: Descricao")
+        interacao = pd.read_csv(arquivo)
         link = []
         for i in interacao['0']:
             link.append(i)
@@ -123,7 +122,7 @@ class DadosPesquisa():
         return pd.DataFrame({'descricao': vetor_desc_vagas})
 
     def PegaNomeJob(self):
-        print("Nome")
+        print("Buscando: Nome")
 
         interacao = pd.read_csv('Catho\Conjunto_Link_Catho.csv')
         link = []
@@ -131,7 +130,7 @@ class DadosPesquisa():
             link.append(i)
         vetor_nome_vagas = []
         for j, i in enumerate(link):
-            print(j)
+            print("Nome: ", j)
             go = requests.get(i)
             v = BeautifulSoup(go.text, 'html.parser')
             v = v.find(id='search-result')
@@ -141,7 +140,7 @@ class DadosPesquisa():
         return pd.DataFrame({'nome': vetor_nome_vagas})
 
     def PegaLocalizacaoJob(self):
-        print("Localizacao")
+        print("Buscando: Localizacao")
         interacao = pd.read_csv('Catho\Conjunto_Link_Catho.csv')
         link = []
         for i in interacao['0']:
@@ -150,46 +149,7 @@ class DadosPesquisa():
         cidade = []
         estado = []
         for j, i in enumerate(link):
-            go = requests.get(i)
-            v = BeautifulSoup(go.text, 'html.parser')
-            v = v.find(id='search-result')
-            v = v.find_all('header')
-            for i in v:
-                print(i.button.string)
-                vetor_localizacao_vagas.append(i
-                                               .button
-                                               .string
-                                               #.replace("-", "")
-                                               .replace("(1)", "")
-                                               .replace("(2)", "")
-                                               .replace("(3)", "")
-                                               .replace("(4)", "")
-                                               .replace("(5)", "")
-                                               .replace("(6)", "")
-                                               .replace("(7)", "")
-                                               .replace("(8)", "")
-                                               .replace("(9)", "")
-                                               .split("0")
-                                               )
-        for i in vetor_localizacao_vagas:
-            print(i)
-            cidade.append(i[0])
-            estado.append(i[-1])
-        df = pd.DataFrame({"cidade": cidade, "estado": estado})
-        return df
-
-    def PegaLocalizacaoJobBackup(self):
-        print("Localizacao")
-
-        interacao = pd.read_csv('Catho\Conjunto_Link_Catho.csv')
-        link = []
-        for i in interacao['0']:
-            link.append(i)
-        vetor_localizacao_vagas = []
-        cidade = []
-        estado = []
-        for j, i in enumerate(link):
-            print(j)
+            print("Localizacao: ", j)
             go = requests.get(i)
             v = BeautifulSoup(go.text, 'html.parser')
             v = v.find(id='search-result')
@@ -218,15 +178,16 @@ class DadosPesquisa():
                                                .replace(" (18)", "")
                                                .replace(" (19)", "")
                                                .replace(" (20)", "")
+                                               .replace(" (30)", "")
                                                .split(sep="-"))
         for i in vetor_localizacao_vagas:
             cidade.append(i[0])
-            estado.append(i[1])
+            estado.append(i[-1])
         df = pd.DataFrame({"cidade": cidade, "estado": estado})
         return df
 
     def PegaSalarioJob(self):
-        print("Salario")
+        print("Buscando: Salario")
         vetor_salario_vagas = []
         vetor_salario_media = []
 
@@ -235,7 +196,7 @@ class DadosPesquisa():
         for i in interacao['0']:
             link.append(i)
         for j, i in enumerate(link):
-            print(j)
+            print("Salario:", j)
             go = requests.get(i)
             v = BeautifulSoup(go.text, 'html.parser')
             v = v.find(id='search-result')
@@ -259,7 +220,7 @@ class DadosPesquisa():
         return pd.DataFrame({'salario': vetor_salario_media})
 
     def PegaQtdJob(self):
-        print("Quantized")
+
         go = requests.get(self.link)
         v = BeautifulSoup(go.text, 'html.parser')
         v = v.find(id='search-result')
@@ -270,7 +231,7 @@ class DadosPesquisa():
         return int(v)
 
     def PegaLinkJobDataFrame(self):
-        print("Link")
+        print("Buscando: Link")
 
         interacao = pd.read_csv('Catho\Conjunto_Link_Catho.csv')
         link = []

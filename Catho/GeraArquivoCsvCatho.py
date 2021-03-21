@@ -15,7 +15,7 @@ class AnaliseArquivo():
         self.valor_pesquisa_traco = pesquisa.replace(" ", "-").replace("ã", "a").replace("ç", "c").replace("é",
                                                                                                            "e").lower()
 
-    def GeraArquivoCsvBackup(self):
+    def GeraArquivoCsv(self):
         if os.path.isfile('Catho\Conjunto_Link_Catho.csv'):
             cont_int = int(str(self.encontrados).split()[0])
             print(f"Total de anuncios {cont_int}")
@@ -37,7 +37,7 @@ class AnaliseArquivo():
             return df
         else:
             DadosPesquisa(self.pesquisa).ConjuntoLink()
-            AnaliseArquivo(self.pesquisa).GeraArquivoCsvBackup()
+            AnaliseArquivo(self.pesquisa).GeraArquivoCsv()
 
 
     def GeraDf(self):
