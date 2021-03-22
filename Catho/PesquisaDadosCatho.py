@@ -76,6 +76,23 @@ class DadosPesquisa():
                 vetor_dtpupli_vagas.append(i.get("data-gtm-dimension-44").split("T")[0])
         return pd.DataFrame({'datapubli': vetor_dtpupli_vagas})
 
+    def PegaDescCurtaJob(self):
+        print("Buscando: Descrição Curta")
+
+        interacao = pd.read_csv('Catho\Conjunto_Link_Catho.csv')
+        link = []
+        for i in interacao['0']:
+            link.append(i)
+        vetor_desccurta_vagas = []
+        for j, i in enumerate(link):
+            print("Data: ", j)
+            go = requests.get(i)
+            v = BeautifulSoup(go.text, 'html.parser')
+            v = v.find_all(class_='job-description')
+            for i in v:
+                vetor_desccurta_vagas.append(i.string)
+        return pd.DataFrame({'datadesccurta': vetor_desccurta_vagas})
+
     def PegaLinkDescricaoJob(self):
         print("Buscando: Descricao")
 

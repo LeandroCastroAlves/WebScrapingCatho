@@ -21,17 +21,19 @@ class AnaliseArquivo():
             print(f"Total de anuncios {cont_int}")
             print(f'Por favor aguarde o rastreio das informações, isso pode demorar um pouco...')
             with concurrent.futures.ThreadPoolExecutor() as executor:
-                future = executor.submit(DadosPesquisa.PegaDtPubliJob, self.pesquisa)
-                future2 = executor.submit(DadosPesquisa.PegaNomeJob, self.pesquisa)
-                future3 = executor.submit(DadosPesquisa.PegaLocalizacaoJob, self.pesquisa)
-                future4 = executor.submit(DadosPesquisa.PegaSalarioJob, self.pesquisa)
-                future5 = executor.submit(DadosPesquisa.PegaLinkDescricaoJob, self.pesquisa)
+                df1 = executor.submit(DadosPesquisa.PegaDtPubliJob, self.pesquisa)
+                df2 = executor.submit(DadosPesquisa.PegaNomeJob, self.pesquisa)
+                df3 = executor.submit(DadosPesquisa.PegaLocalizacaoJob, self.pesquisa)
+                df4 = executor.submit(DadosPesquisa.PegaSalarioJob, self.pesquisa)
+                df5 = executor.submit(DadosPesquisa.PegaDescCurtaJob, self.pesquisa)
+                df6 = executor.submit(DadosPesquisa.PegaLinkDescricaoJob, self.pesquisa)
 
-            df = future.result()\
-                .join(future2.result())\
-                .join(future3.result())\
-                .join(future4.result())\
-                .join(future5.result())\
+            df = df1.result()\
+                .join(df2.result())\
+                .join(df3.result())\
+                .join(df4.result())\
+                .join(df5.result())\
+                .join(df6.result())\
                 .to_csv(f'Catho\{self.valor_pesquisa_traco}.csv', index=None)
             os.remove('Catho\Conjunto_Link_Catho.csv')
             return df
