@@ -10,20 +10,20 @@
 
 # Ex:
 
-#altere isso para sua pesquisa
-pesquisa = "gerente farmaceutico"
-#fim pesquisa
+#altere isso para sua pesquisa\n
+pesquisa = "gerente farmaceutico"\n
+#fim pesquisa\n
 
-FormataPesquisa = DadosPesquisa(pesquisa).valor_pesquisa_traco
-arquivo = f"Catho/{FormataPesquisa}.csv"
+FormataPesquisa = DadosPesquisa(pesquisa).valor_pesquisa_traco\n
+arquivo = f"Catho/{FormataPesquisa}.csv"\n
 
-def info(arquivo=arquivo):
-    print(EstatisticasArquivo(arquivo).MediaGeral())
-    print(EstatisticasArquivo(arquivo).SalarioPorCidade())
-    print(EstatisticasArquivo(arquivo).SalarioPorRegiao())
+def info(arquivo=arquivo):\n
+    print(EstatisticasArquivo(arquivo).MediaGeral())\n
+    print(EstatisticasArquivo(arquivo).SalarioPorCidade())\n
+    print(EstatisticasArquivo(arquivo).SalarioPorRegiao())\n
 
-if not os.path.isfile(arquivo):
-    AnaliseArquivo(pesquisa).GeraArquivoCsv()
-    info()
-else:
-    info()
+if not os.path.isfile(arquivo):\n
+    AnaliseArquivo(pesquisa).GeraArquivoCsv()\n
+    info()\n
+else:\n
+    info()\n
