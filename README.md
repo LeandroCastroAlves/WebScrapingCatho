@@ -8,11 +8,11 @@
  
  GeraArquivoCsv funciona com Threads e isso faz com que a geração do arquivo sera bem rapido.
 
-Ex:
+# Ex:
 
-# altere isso para sua pesquisa
+#altere isso para sua pesquisa
 pesquisa = "gerente farmaceutico"
-# fim pesquisa
+#fim pesquisa
 
 FormataPesquisa = DadosPesquisa(pesquisa).valor_pesquisa_traco
 arquivo = f"Catho/{FormataPesquisa}.csv"
