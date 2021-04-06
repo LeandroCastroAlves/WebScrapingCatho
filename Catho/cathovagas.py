@@ -1,19 +1,30 @@
 import os
-import pandas as pd
-import requests
-from bs4 import BeautifulSoup
-
 from PesquisaDadosCatho import DadosPesquisa
 from GeraArquivoCsvCatho import AnaliseArquivo
 from AnaliseArquivoCsvCatho import EstatisticasArquivo
-#print(DadosPesquisa().PegaDescricaoJob())
-#print(DadosPesquisa("araguari").pesquisa)
-#print(DadosPesquisa(pesquisa="uberaba").PegaDescCurtaJob())
-#EstatisticasArquivo("Catho/uberaba.csv").SalarioPorRegiao()
-#print(DadosPesquisa(pesquisa="engenheiro de dados").)
-print(AnaliseArquivo(pesquisa="uberaba").GeraArquivoCsv())
-#print(AnaliseArquivo(pesquisa="cientista de dados").)
-#EstatisticasArquivo('mgBK.csv').SalarioPorRegiao()
+
+
+
+# altere isso para sua pesquisa
+pesquisa = "gerente farmaceutico"
+# fim pesquisa
+
+FormataPesquisa = DadosPesquisa(pesquisa).valor_pesquisa_traco
+arquivo = f"Catho/{FormataPesquisa}.csv"
+
+def info(arquivo=arquivo):
+    print(EstatisticasArquivo(arquivo).MediaGeral())
+    print(EstatisticasArquivo(arquivo).SalarioPorCidade())
+    print(EstatisticasArquivo(arquivo).SalarioPorRegiao())
+
+if not os.path.isfile(arquivo):
+    AnaliseArquivo(pesquisa).GeraArquivoCsv()
+    info()
+else:
+    info()
+
+
+
 
 
 

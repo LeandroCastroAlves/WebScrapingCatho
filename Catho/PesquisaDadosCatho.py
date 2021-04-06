@@ -1,8 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-import os
-
 
 # Classe para formatar o texto do link
 class DadosPesquisa():
